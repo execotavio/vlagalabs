@@ -1,0 +1,12 @@
+{
+  "buildCommand": "prisma generate && prisma migrate deploy && payload migrate && next build",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "DATABASE_URL": "@database-url",
+    "PAYLOAD_SECRET": "@payload-secret",
+    "NEXTAUTH_SECRET": "@nextauth-secret",
+    "NEXTAUTH_URL": "@nextauth-url"
+  }
+}
