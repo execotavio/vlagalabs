@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section id="home" className="relative pt-32 pb-20 overflow-hidden">
       {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-white to-emerald-50 -z-10" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-[#fff7f1] to-vlaga-light -z-10" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -38,14 +38,14 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="#solucoes"
-                className="inline-flex items-center justify-center px-8 py-4 bg-vlaga-primary text-white rounded-lg hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl font-medium group"
+                className="inline-flex items-center justify-center px-8 py-4 bg-vlaga-accent text-white rounded-lg hover:bg-vlaga-primary transition-all shadow-lg hover:shadow-xl font-medium group"
               >
                 Conheça nossas soluções
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="#contato"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-vlaga-primary border-2 border-vlaga-primary rounded-lg hover:bg-vlaga-primary hover:text-white transition-all shadow-md font-medium"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-vlaga-primary border-2 border-vlaga-primary rounded-lg hover:border-vlaga-accent hover:bg-vlaga-primary hover:text-white transition-all shadow-md font-medium"
               >
                 Fale conosco
               </Link>
@@ -59,12 +59,12 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-gray-200">
+            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl bg-vlaga-primary">
               <Image
-                src="https://cdn.abacus.ai/images/5eec095e-556c-443d-a92f-f3eb97a579ed.png"
-                alt="Vlaga Labs - Automação e IA"
+                src="/brand-profile.png"
+                alt="Logo oficial Vlaga Labs"
                 fill
-                className="object-cover"
+                className="object-contain"
                 priority
               />
             </div>

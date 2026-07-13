@@ -3,7 +3,7 @@ title: "Rascunho de exemplo"
 slug: "rascunho-exemplo"
 date: "2026-07-13"
 excerpt: "Este post existe apenas para validar que rascunhos nao aparecem no site publicado."
-coverImage: "/og-image.png"
+coverImage: "/brand-profile.png"
 author: "Vlaga Labs"
 tags:
   - rascunho

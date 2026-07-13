@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 export default function Footer() {
@@ -12,14 +13,20 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-12">
           {/* Company Info */}
           <div className="md:col-span-2">
-            <h3 className="text-2xl font-bold mb-4">Vlaga Labs</h3>
+            <Image
+              src="/logo.svg"
+              alt="Vlaga Labs"
+              width={122}
+              height={173}
+              className="h-20 w-auto mb-5"
+            />
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.
+              Automação de processos, agentes de IA e softwares sob medida para empresas que querem operar melhor.
             </p>
             <div className="space-y-3">
               <div className="flex items-center space-x-3 text-gray-300">
                 <MapPin className="w-5 h-5 flex-shrink-0" />
-                <span>Lorem ipsum dolor sit amet, 123</span>
+                <span>Atendimento remoto para todo o Brasil</span>
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
                 <Phone className="w-5 h-5 flex-shrink-0" />
@@ -27,7 +34,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
                 <Mail className="w-5 h-5 flex-shrink-0" />
-                <span>contato@vladlabs.com</span>
+                <span>contato@vlagalabs.com.br</span>
               </div>
             </div>
           </div>
@@ -38,22 +45,22 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="#solucoes" className="text-gray-300 hover:text-vlaga-accent transition-colors">
-                  Lorem Ipsum
+                  Agentes de IA
                 </Link>
               </li>
               <li>
                 <Link href="#solucoes" className="text-gray-300 hover:text-vlaga-accent transition-colors">
-                  Dolor Sit
+                  Automação de processos
                 </Link>
               </li>
               <li>
                 <Link href="#solucoes" className="text-gray-300 hover:text-vlaga-accent transition-colors">
-                  Consectetur
+                  Análise de dados
                 </Link>
               </li>
               <li>
                 <Link href="#solucoes" className="text-gray-300 hover:text-vlaga-accent transition-colors">
-                  Adipiscing
+                  Softwares sob medida
                 </Link>
               </li>
             </ul>

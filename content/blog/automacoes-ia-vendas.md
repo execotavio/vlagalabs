@@ -3,7 +3,7 @@ title: "Como automações com IA ajudam times de vendas"
 slug: "automacoes-ia-vendas"
 date: "2026-07-13"
 excerpt: "Entenda como automações e inteligência artificial podem reduzir tarefas repetitivas e melhorar o atendimento comercial."
-coverImage: "/og-image.png"
+coverImage: "/brand-profile.png"
 author: "Vlaga Labs"
 tags:
   - automações

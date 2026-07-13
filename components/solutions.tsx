@@ -8,27 +8,23 @@ import { BarChart3, Bot, TrendingUp, Workflow } from "lucide-react";
 const solutions = [
   {
     icon: TrendingUp,
-    title: "Lorem Ipsum Dolor",
-    description: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud.",
-    image: "https://cdn.abacus.ai/images/cf7d8437-0e7c-445e-891c-8e337d5534f8.png",
+    title: "Agentes de IA e Chatbots",
+    description: "Atendimento, qualificação de leads e agendamento automático via WhatsApp, Instagram, site ou CRM.",
   },
   {
     icon: Bot,
-    title: "Consectetur Adipiscing",
-    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    image: "https://cdn.abacus.ai/images/79b7a240-3b23-4b2e-bd08-a34e91a56464.png",
+    title: "Automação de Processos",
+    description: "Integrações entre sistemas, planilhas, CRMs e ERPs para eliminar tarefas manuais e retrabalho.",
   },
   {
     icon: BarChart3,
-    title: "Excepteur Sint Occaecat",
-    description: "Cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum sed perspiciatis.",
-    image: "https://cdn.abacus.ai/images/4ab6fcbb-724b-4b1d-b1d3-71e4fe3fc245.png",
+    title: "Análise de Dados com IA",
+    description: "Extração, leitura e organização automática de dados de PDFs, e-mails e documentos complexos.",
   },
   {
     icon: Workflow,
-    title: "Nemo Enim Ipsam",
-    description: "Voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos.",
-    image: "https://cdn.abacus.ai/images/d7be3658-c2d5-4cc4-b463-7fc809377bbb.png",
+    title: "Softwares Sob Medida",
+    description: "Fluxos, painéis e ferramentas personalizadas para a necessidade real da sua operação.",
   },
 ];
 
@@ -52,7 +48,7 @@ export default function Solutions() {
             Soluções que Temos
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur
+            Criamos automações, agentes de IA e sistemas personalizados para tornar operações mais rápidas, integradas e inteligentes.
           </p>
         </motion.div>
 
@@ -68,18 +64,18 @@ export default function Solutions() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
               >
-                <div className="relative aspect-video bg-gray-200">
+                <div className="relative aspect-video bg-vlaga-primary">
                   <Image
-                    src={solution.image}
-                    alt={solution.title}
+                    src="/logo.svg"
+                    alt="Vlaga Labs"
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="object-contain p-8 group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="p-8">
                   <div className="flex items-center space-x-3 mb-4">
-                    <div className="p-3 bg-vlaga-primary/10 rounded-lg">
-                      <Icon className="w-6 h-6 text-vlaga-primary" />
+                    <div className="p-3 bg-vlaga-accent/10 rounded-lg">
+                      <Icon className="w-6 h-6 text-vlaga-accent" />
                     </div>
                     <h3 className="text-xl font-bold text-vlaga-primary">
                       {solution.title}

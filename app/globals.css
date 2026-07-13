@@ -4,8 +4,9 @@
 
 @layer base {
   :root {
-    --vlaga-primary: #05201b;
-    --vlaga-accent: #10b981;
+    --vlaga-primary: #002c22;
+    --vlaga-accent: #ff6b1a;
+    --vlaga-light: #eaeaea;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -50,6 +51,15 @@
   }
   .bg-vlaga-accent {
     background-color: var(--vlaga-accent);
+  }
+  .border-vlaga-accent {
+    border-color: var(--vlaga-accent);
+  }
+  .text-vlaga-light {
+    color: var(--vlaga-light);
+  }
+  .bg-vlaga-light {
+    background-color: var(--vlaga-light);
   }
   .border-vlaga-primary {
     border-color: var(--vlaga-primary);

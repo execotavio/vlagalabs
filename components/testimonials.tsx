@@ -7,22 +7,19 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Lorem Ipsum",
-    role: "CEO, Empresa A",
-    content: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa.",
-    image: "https://cdn.abacus.ai/images/e05d9649-6a47-4927-84eb-a4425e431c00.png",
+    name: "Operação Comercial",
+    role: "Vendas e pré-vendas",
+    content: "Automatizações bem desenhadas reduzem o tempo de resposta, qualificam oportunidades e deixam o time focado nas conversas que realmente avançam.",
   },
   {
-    name: "Dolor Sit Amet",
-    role: "Diretor, Empresa B",
-    content: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos.",
-    image: "https://cdn.abacus.ai/images/5c01161f-a31f-447f-b83f-82a6fb1bc16e.png",
+    name: "Atendimento ao Cliente",
+    role: "Suporte e relacionamento",
+    content: "Agentes de IA ajudam a responder dúvidas frequentes, organizar solicitações e manter uma experiência consistente em diferentes canais.",
   },
   {
-    name: "Consectetur Elit",
-    role: "CTO, Empresa C",
-    content: "Et harum quidem rerum facilis est et expedita distinctio nam libero tempore cum soluta nobis est eligendi optio cumque nihil.",
-    image: "https://cdn.abacus.ai/images/5d02f842-3bcb-43e6-ab94-2e37604d2478.png",
+    name: "Gestão de Processos",
+    role: "Backoffice e liderança",
+    content: "Integrações entre ferramentas eliminam retrabalho, centralizam informações e dão mais previsibilidade para a tomada de decisão.",
   },
 ];
 
@@ -46,7 +43,7 @@ export default function Testimonials() {
             O Que Dizem Sobre Nós
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus
+            Tecnologia aplicada com foco no que importa: operação fluida, atendimento melhor e decisões mais rápidas.
           </p>
         </motion.div>
 
@@ -63,10 +60,10 @@ export default function Testimonials() {
               <Quote className="absolute top-6 right-6 w-8 h-8 text-vlaga-accent opacity-20" />
               
               <div className="flex flex-col items-center text-center">
-                <div className="relative w-20 h-20 mb-4 rounded-full overflow-hidden bg-gray-200">
+                <div className="relative w-20 h-20 mb-4 rounded-full overflow-hidden bg-vlaga-primary">
                   <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
+                    src="/brand-profile.png"
+                    alt="Vlaga Labs"
                     fill
                     className="object-cover"
                   />
@@ -80,7 +77,7 @@ export default function Testimonials() {
                 </p>
                 
                 <p className="text-gray-600 leading-relaxed italic">
-                  "{testimonial.content}"
+                  &quot;{testimonial.content}&quot;
                 </p>
               </div>
             </motion.div>

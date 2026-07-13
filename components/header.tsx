@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -33,10 +34,15 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="text-2xl font-bold text-vlaga-primary">
-              Vlaga Labs
-            </div>
+          <Link href="/" className="flex items-center" aria-label="Vlaga Labs">
+            <Image
+              src="/brand-profile.png"
+              alt="Vlaga Labs"
+              width={108}
+              height={108}
+              className="h-12 w-12 rounded-lg"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -56,7 +62,7 @@ export default function Header() {
           <div className="hidden md:block">
             <Link
               href="#contato"
-              className="px-6 py-3 bg-vlaga-primary text-white rounded-lg hover:bg-opacity-90 transition-all shadow-md hover:shadow-lg font-medium"
+              className="px-6 py-3 bg-vlaga-accent text-white rounded-lg hover:bg-vlaga-primary transition-all shadow-md hover:shadow-lg font-medium"
             >
               Agendar Reunião
             </Link>
@@ -95,7 +101,7 @@ export default function Header() {
               ))}
               <Link
                 href="#contato"
-                className="block w-full px-6 py-3 bg-vlaga-primary text-white rounded-lg text-center hover:bg-opacity-90 transition-all shadow-md font-medium"
+                className="block w-full px-6 py-3 bg-vlaga-accent text-white rounded-lg text-center hover:bg-vlaga-primary transition-all shadow-md font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Agendar Reunião
