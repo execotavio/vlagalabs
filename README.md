@@ -1,15 +1,73 @@
 # Vlaga Labs
 
-Site institucional estatico da Vlaga Labs, publicado no GitHub Pages em:
+Site institucional estatico da Vlaga Labs, com blog, SEO e publicacao no GitHub Pages.
+
+Producao:
 
 https://vlagalabs.com.br
 
-## Desenvolvimento
+Repositorio:
+
+https://github.com/execotavio/vlagalabs
+
+## Estado atual
+
+Este projeto roda com Next.js em modo estatico. O site publico nao depende de servidor, banco de dados, API routes, Payload, Prisma ou NextAuth.
+
+O build gera a pasta `out`, que e publicada no GitHub Pages pelo workflow `.github/workflows/pages.yml`.
+
+## Stack
+
+- Next.js com App Router
+- React
+- Tailwind CSS
+- Markdown para posts do blog
+- Decap CMS para edicao de posts em `/admin`
+- GitHub Actions para build e deploy
+- GitHub Pages como hospedagem
+
+## Estrutura principal
+
+- `app/page.tsx`: pagina inicial institucional
+- `app/blog/page.tsx`: listagem estatica do blog
+- `app/blog/[slug]/page.tsx`: pagina estatica de cada post
+- `app/sitemap.ts`: sitemap gerado no build
+- `components/`: secoes visuais do site
+- `components/faq.tsx`: FAQ visivel e Schema.org `FAQPage`
+- `content/blog/`: posts em Markdown
+- `lib/blog.ts`: leitura, ordenacao e filtragem dos posts
+- `public/admin/`: Decap CMS
+- `public/uploads/`: imagens enviadas pelo CMS
+- `public/CNAME`: dominio customizado usado no export
+- `public/.nojekyll`: evita processamento do GitHub Pages com Jekyll
+- `.github/workflows/pages.yml`: deploy do GitHub Pages
+
+## Desenvolvimento local
+
+Instale as dependencias:
 
 ```bash
 npm ci
+```
+
+Suba o servidor local:
+
+```bash
 npm run dev
 ```
+
+Abra:
+
+```text
+http://localhost:3000
+```
+
+Rotas importantes:
+
+- `/`: site institucional
+- `/blog`: listagem do blog
+- `/blog/automacoes-ia-vendas`: exemplo de post publicado
+- `/admin`: Decap CMS
 
 ## Build estatico
 
@@ -17,11 +75,54 @@ npm run dev
 npm run build
 ```
 
-O Next.js esta configurado com `output: "export"` e gera a pasta `out`, que e publicada pelo GitHub Actions em `.github/workflows/pages.yml`.
+O `next.config.js` usa:
+
+- `output: "export"`
+- `trailingSlash: true`
+- `images.unoptimized: true`
+
+Com isso, o Next exporta HTML, CSS, JS e assets para `out`.
+
+Arquivos esperados no export:
+
+- `out/index.html`
+- `out/blog/index.html`
+- `out/blog/<slug>/index.html`
+- `out/admin/index.html`
+- `out/sitemap.xml`
+- `out/robots.txt`
+- `out/CNAME`
+- `out/.nojekyll`
+- `out/favicon.png`
+
+## Publicacao no GitHub Pages
+
+O deploy acontece automaticamente a cada push na branch `main`.
+
+Fluxo:
+
+1. Commit na `main`
+2. GitHub Actions instala dependencias com `npm ci`
+3. Roda `npm run build`
+4. Publica a pasta `out` no GitHub Pages
+
+O dominio configurado para producao e:
+
+```text
+vlagalabs.com.br
+```
+
+O arquivo correto para o dominio no build e `public/CNAME`, pois ele e copiado para `out/CNAME`.
 
 ## Blog
 
-Os posts ficam em `content/blog/*.md` e sao renderizados estaticamente durante o build.
+Os posts ficam em:
+
+```text
+content/blog/*.md
+```
+
+Cada post e renderizado no build. Isso significa que o conteudo ja sai em HTML rastreavel, sem depender de fetch client-side.
 
 Campos usados no frontmatter:
 
@@ -36,17 +137,93 @@ Campos usados no frontmatter:
 - `seoTitle`
 - `seoDescription`
 
-Posts com `published: false` nao aparecem no blog nem no sitemap.
+Posts com:
 
-## CMS
+```yaml
+published: false
+```
 
-O Decap CMS fica em `/admin` e usa a configuracao em `public/admin/config.yml`.
+nao aparecem no blog nem no sitemap.
 
-Para publicar posts pela interface web:
+## Decap CMS
 
-1. Crie um OAuth App no GitHub para o repositorio `execotavio/vlagalabs`.
-2. Configure um OAuth bridge no Cloudflare Worker em `https://cms-auth.vlagalabs.com.br`.
-3. Use a callback URL indicada pelo OAuth bridge escolhido.
-4. Garanta que os editores tenham permissao de push no repositorio.
+O CMS fica em:
 
-Ao salvar um post no Decap CMS, ele cria um commit na branch `main`. O GitHub Actions faz o build e publica a nova versao no GitHub Pages.
+```text
+/admin
+```
+
+Configuracao:
+
+```text
+public/admin/config.yml
+```
+
+Backend atual:
+
+- repo: `execotavio/vlagalabs`
+- branch: `main`
+- media folder: `public/uploads`
+- public folder: `/uploads`
+- OAuth bridge: `https://cms-auth.vlagalabs.com.br`
+
+Ao salvar um post no CMS, o Decap cria um commit na branch `main`. Esse commit dispara o GitHub Actions e publica a nova versao no GitHub Pages.
+
+Somente usuarios com permissao de push no repositorio conseguem publicar.
+
+## SEO
+
+O site esta preparado para busca com:
+
+- metadata por pagina no App Router
+- canonical URL para `https://vlagalabs.com.br`
+- Open Graph
+- Twitter cards
+- `robots.txt` com referencia para o sitemap
+- `sitemap.xml` com home, blog e posts publicados
+- JSON-LD `Organization` e `WebSite` na home
+- JSON-LD `BlogPosting` em cada post
+- JSON-LD `FAQPage` no FAQ
+- conteudo do blog renderizado no HTML durante o build
+
+## Identidade visual
+
+Os assets oficiais ficam em `public`:
+
+- `public/logo.svg`
+- `public/logo.png`
+- `public/brand-profile.png`
+- `public/favicon.png`
+- `public/favicon.svg`
+- `public/og-image.png`
+
+Cores principais:
+
+- verde escuro: `#002c22`
+- laranja: `#ff6b1a`
+- cinza claro: `#eaeaea`
+
+As variaveis ficam em `app/globals.css`.
+
+## Cuidados comuns
+
+Se aparecer erro de chunk do Next, como `Cannot find module './373.js'`, normalmente e cache corrompido em `.next`.
+
+Resolucao:
+
+```bash
+rm -rf .next
+npm run dev
+```
+
+Se o favicon parecer antigo, teste em aba anonima ou faca hard refresh. Navegadores costumam manter favicon em cache por bastante tempo.
+
+## Comandos uteis
+
+```bash
+npm run dev
+npm run build
+git status --short --branch
+git pull --rebase origin main
+git push origin main
+```
