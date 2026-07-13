@@ -1,0 +1,78 @@
+backend:
+  name: github
+  repo: execotavio/vlagalabs
+  branch: main
+  base_url: https://cms-auth.vlagalabs.com.br
+  auth_endpoint: auth
+
+publish_mode: simple
+media_folder: public/uploads
+public_folder: /uploads
+
+site_url: https://vlagalabs.com.br
+display_url: https://vlagalabs.com.br
+logo_url: /logo.png
+locale: pt
+
+collections:
+  - name: posts
+    label: Posts
+    folder: content/blog
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    sortable_fields:
+      - date
+      - title
+    view_filters:
+      - label: Publicados
+        field: published
+        pattern: true
+      - label: Rascunhos
+        field: published
+        pattern: false
+    fields:
+      - label: Titulo
+        name: title
+        widget: string
+      - label: Slug
+        name: slug
+        widget: string
+        hint: "URL do post, sem acentos e com hifens. Ex: automacoes-ia-vendas"
+      - label: Data
+        name: date
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: DD/MM/YYYY
+        time_format: false
+      - label: Resumo
+        name: excerpt
+        widget: text
+      - label: Imagem de capa
+        name: coverImage
+        widget: image
+        required: false
+      - label: Autor
+        name: author
+        widget: string
+        default: Vlaga Labs
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+      - label: Publicado
+        name: published
+        widget: boolean
+        default: true
+      - label: Titulo SEO
+        name: seoTitle
+        widget: string
+        required: false
+      - label: Descricao SEO
+        name: seoDescription
+        widget: text
+        required: false
+      - label: Conteudo
+        name: body
+        widget: markdown

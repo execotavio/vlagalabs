@@ -1,34 +1,35 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { Calendar, ArrowRight } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { getPayloadClient } from "@/lib/payload";
+import { formatPostDate, getAllPosts } from "@/lib/blog";
 
-export const dynamic = "force-dynamic";
+export const metadata: Metadata = {
+  title: "Blog | Vlaga Labs",
+  description:
+    "Artigos sobre automações, inteligência artificial, vendas e suporte ao cliente.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "Blog | Vlaga Labs",
+    description:
+      "Artigos sobre automações, inteligência artificial, vendas e suporte ao cliente.",
+    url: "https://vlagalabs.com.br/blog",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Vlaga Labs",
+    description:
+      "Artigos sobre automações, inteligência artificial, vendas e suporte ao cliente.",
+  },
+};
 
-async function getPosts() {
-  try {
-    const payload = await getPayloadClient();
-    const { docs } = await payload.find({
-      collection: 'posts',
-      where: {
-        status: {
-          equals: 'published',
-        },
-      },
-      sort: '-publishedAt',
-      depth: 2,
-    });
-    return docs;
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    return [];
-  }
-}
-
-export default async function BlogPage() {
-  const posts = await getPosts();
+export default function BlogPage() {
+  const posts = getAllPosts();
 
   return (
     <div className="min-h-screen bg-white">
@@ -54,20 +55,16 @@ export default async function BlogPage() {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post) => {
-                const coverImageUrl = typeof post.coverImage === 'object' && post.coverImage?.url 
-                  ? post.coverImage.url 
-                  : null;
-                
                 return (
                   <Link
-                    key={post.id}
+                    key={post.slug}
                     href={`/blog/${post.slug}`}
                     className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
                   >
-                    {coverImageUrl && (
+                    {post.coverImage && (
                       <div className="relative aspect-video bg-gray-200">
                         <Image
-                          src={coverImageUrl}
+                          src={post.coverImage}
                           alt={post.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -89,11 +86,7 @@ export default async function BlogPage() {
                       <div className="flex items-center justify-between text-sm text-gray-500">
                         <div className="flex items-center space-x-2">
                           <Calendar className="w-4 h-4" />
-                          <span>
-                            {post.publishedAt
-                              ? new Date(post.publishedAt).toLocaleDateString("pt-BR")
-                              : "--"}
-                          </span>
+                          <span>{formatPostDate(post.date)}</span>
                         </div>
                         <div className="flex items-center space-x-1 text-vlaga-primary group-hover:translate-x-1 transition-transform">
                           <span className="font-medium">Ler mais</span>

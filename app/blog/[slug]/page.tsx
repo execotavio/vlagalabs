@@ -1,77 +1,106 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Calendar, User, ArrowLeft } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { getPayloadClient } from "@/lib/payload";
-import { LexicalContent } from "@/components/lexical-content";
+import { formatPostDate, getAllPosts, getPostBySlug } from "@/lib/blog";
 
-export const dynamic = "force-dynamic";
+const siteUrl = "https://vlagalabs.com.br";
+
+function absoluteUrl(pathOrUrl: string) {
+  if (pathOrUrl.startsWith("http://") || pathOrUrl.startsWith("https://")) {
+    return pathOrUrl;
+  }
+
+  return `${siteUrl}${pathOrUrl.startsWith("/") ? pathOrUrl : `/${pathOrUrl}`}`;
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-async function getPost(slug: string) {
-  try {
-    const payload = await getPayloadClient();
-    const { docs } = await payload.find({
-      collection: 'posts',
-      where: {
-        slug: {
-          equals: slug,
-        },
-        status: {
-          equals: 'published',
-        },
-      },
-      depth: 2,
-      limit: 1,
-    });
-    return docs[0] || null;
-  } catch (error) {
-    console.error("Error fetching post:", error);
-    return null;
-  }
+export function generateStaticParams() {
+  return getAllPosts().map((post) => ({ slug: post.slug }));
 }
 
-export async function generateStaticParams() {
-  try {
-    const payload = await getPayloadClient();
-    const { docs } = await payload.find({
-      collection: 'posts',
-      where: {
-        status: {
-          equals: 'published',
-        },
-      },
-      limit: 1000,
-    });
-    return docs.map((post) => ({ slug: post.slug }));
-  } catch (error) {
-    return [];
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+
+  if (!post) {
+    return {
+      title: "Post nao encontrado | Vlaga Labs",
+    };
   }
+
+  const title = post.seoTitle || post.title;
+  const description = post.seoDescription || post.excerpt;
+  const url = `${siteUrl}/blog/${post.slug}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "article",
+      publishedTime: post.date,
+      authors: [post.author],
+      images: post.coverImage ? [post.coverImage] : ["/og-image.png"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: post.coverImage ? [post.coverImage] : ["/og-image.png"],
+    },
+  };
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
   const resolvedParams = await params;
-  const post = await getPost(resolvedParams.slug);
+  const post = getPostBySlug(resolvedParams.slug);
 
   if (!post) {
     notFound();
   }
 
-  const coverImageUrl = typeof post.coverImage === 'object' && post.coverImage?.url 
-    ? post.coverImage.url 
-    : null;
-  
-  const authorName = typeof post.author === 'object' && post.author?.name 
-    ? post.author.name 
-    : 'Autor';
+  const postUrl = `${siteUrl}/blog/${post.slug}`;
+  const blogPostingJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.seoDescription || post.excerpt,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Organization",
+      name: post.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Vlaga Labs",
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/logo.png`,
+      },
+    },
+    mainEntityOfPage: postUrl,
+    image: post.coverImage ? absoluteUrl(post.coverImage) : `${siteUrl}/og-image.png`,
+  };
 
   return (
     <div className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
+      />
       <Header />
       
       <main className="pt-32 pb-20">
@@ -86,10 +115,10 @@ export default async function BlogPostPage({ params }: PageProps) {
           </Link>
 
           {/* Cover Image */}
-          {coverImageUrl && (
+          {post.coverImage && (
             <div className="relative aspect-video rounded-2xl overflow-hidden mb-8 bg-gray-200">
               <Image
-                src={coverImageUrl}
+                src={post.coverImage}
                 alt={post.title}
                 fill
                 className="object-cover"
@@ -107,19 +136,11 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-8 pb-8 border-b border-gray-200">
             <div className="flex items-center space-x-2">
               <User className="w-5 h-5" />
-              <span>{authorName}</span>
+              <span>{post.author}</span>
             </div>
             <div className="flex items-center space-x-2">
               <Calendar className="w-5 h-5" />
-              <span>
-                {post.publishedAt
-                  ? new Date(post.publishedAt).toLocaleDateString("pt-BR", {
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    })
-                  : "--"}
-              </span>
+              <span>{formatPostDate(post.date)}</span>
             </div>
           </div>
 
@@ -132,7 +153,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
           {/* Content */}
           <div className="prose prose-lg max-w-none prose-headings:text-vlaga-primary prose-a:text-vlaga-accent hover:prose-a:text-vlaga-primary">
-            <LexicalContent content={post.content} />
+            <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
           </div>
         </article>
       </main>
