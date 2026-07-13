@@ -2,7 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+
+const companyLegalName =
+  "O. DE CARVALHO TRINDADE CONSULTORIA EM TECNOLOGIA LTDA";
+const companyDocument = "64.286.928/0001-67";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -12,7 +16,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-4 gap-12">
           {/* Company Info */}
-          <div className="md:col-span-2">
+          <div id="contato" className="md:col-span-2 scroll-mt-24">
             <Image
               src="/logo.svg"
               alt="Vlaga Labs"
@@ -24,9 +28,9 @@ export default function Footer() {
               Automação de processos, agentes de IA e softwares sob medida para empresas que querem operar melhor.
             </p>
             <div className="space-y-3">
-              <div className="flex items-center space-x-3 text-gray-300">
-                <MapPin className="w-5 h-5 flex-shrink-0" />
-                <span>Atendimento remoto para todo o Brasil</span>
+              <div className="text-sm leading-relaxed text-gray-300">
+                <p>{companyLegalName}</p>
+                <p>CNPJ {companyDocument}</p>
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
                 <Phone className="w-5 h-5 flex-shrink-0" />
@@ -44,22 +48,22 @@ export default function Footer() {
             <h4 className="text-lg font-bold mb-4">Soluções</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="#solucoes" className="text-gray-300 hover:text-vlaga-accent transition-colors">
+                <Link href="/#solucoes" className="text-gray-300 hover:text-vlaga-accent transition-colors">
                   Agentes de IA
                 </Link>
               </li>
               <li>
-                <Link href="#solucoes" className="text-gray-300 hover:text-vlaga-accent transition-colors">
+                <Link href="/#solucoes" className="text-gray-300 hover:text-vlaga-accent transition-colors">
                   Automação de processos
                 </Link>
               </li>
               <li>
-                <Link href="#solucoes" className="text-gray-300 hover:text-vlaga-accent transition-colors">
+                <Link href="/#solucoes" className="text-gray-300 hover:text-vlaga-accent transition-colors">
                   Análise de dados
                 </Link>
               </li>
               <li>
-                <Link href="#solucoes" className="text-gray-300 hover:text-vlaga-accent transition-colors">
+                <Link href="/#solucoes" className="text-gray-300 hover:text-vlaga-accent transition-colors">
                   Softwares sob medida
                 </Link>
               </li>
@@ -71,7 +75,7 @@ export default function Footer() {
             <h4 className="text-lg font-bold mb-4">Empresa</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="#sobre" className="text-gray-300 hover:text-vlaga-accent transition-colors">
+                <Link href="/#sobre" className="text-gray-300 hover:text-vlaga-accent transition-colors">
                   Sobre
                 </Link>
               </li>
@@ -81,8 +85,18 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#contato" className="text-gray-300 hover:text-vlaga-accent transition-colors">
+                <Link href="/#contato" className="text-gray-300 hover:text-vlaga-accent transition-colors">
                   Contato
+                </Link>
+              </li>
+              <li>
+                <Link href="/politica-de-privacidade" className="text-gray-300 hover:text-vlaga-accent transition-colors">
+                  Política de Privacidade
+                </Link>
+              </li>
+              <li>
+                <Link href="/termos-de-uso" className="text-gray-300 hover:text-vlaga-accent transition-colors">
+                  Termos de Uso
                 </Link>
               </li>
             </ul>

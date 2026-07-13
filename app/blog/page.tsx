@@ -43,7 +43,8 @@ export default function BlogPage() {
               Nosso Blog
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+              Conteúdos sobre automação de processos, Inteligência Artificial,
+              vendas, atendimento e eficiência operacional.
             </p>
           </div>
 

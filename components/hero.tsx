@@ -28,11 +28,13 @@ export default function Hero() {
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-vlaga-primary leading-tight">
-              Lorem ipsum dolor sit amet consectetur
+              Automação e IA para empresas que querem operar melhor
             </h1>
 
             <p className="text-lg text-gray-600 leading-relaxed">
-              Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae ultricies eget.
+              Desenvolvemos agentes de Inteligência Artificial, automações de
+              processos e softwares sob medida para acelerar vendas, atendimento
+              e rotinas internas.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">

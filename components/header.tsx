@@ -19,9 +19,9 @@ export default function Header() {
   }, []);
 
   const navLinks = [
-    { href: "#home", label: "Home" },
-    { href: "#sobre", label: "Sobre" },
-    { href: "#solucoes", label: "Soluções" },
+    { href: "/#home", label: "Home" },
+    { href: "/#sobre", label: "Sobre" },
+    { href: "/#solucoes", label: "Soluções" },
     { href: "/blog", label: "Artigos" },
   ];
 
@@ -61,7 +61,7 @@ export default function Header() {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Link
-              href="#contato"
+              href="/#contato"
               className="px-6 py-3 bg-vlaga-accent text-white rounded-lg hover:bg-vlaga-primary transition-all shadow-md hover:shadow-lg font-medium"
             >
               Agendar Reunião
@@ -100,7 +100,7 @@ export default function Header() {
                 </Link>
               ))}
               <Link
-                href="#contato"
+                href="/#contato"
                 className="block w-full px-6 py-3 bg-vlaga-accent text-white rounded-lg text-center hover:bg-vlaga-primary transition-all shadow-md font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
