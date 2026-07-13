@@ -23,6 +23,27 @@ const faqs = [
     ),
   },
   {
+    question: "O que é automação de processos?",
+    plainAnswer:
+      "É o uso de tecnologia para executar tarefas repetitivas, garantindo que sua agência funcione sem erros humanos e com maior velocidade.",
+    answer:
+      "É o uso de tecnologia para executar tarefas repetitivas, garantindo que sua agência funcione sem erros humanos e com maior velocidade.",
+  },
+  {
+    question: "O que é automação com IA?",
+    plainAnswer:
+      "Diferente da automação comum, a IA consegue entender contextos, ler mensagens e tomar decisões baseadas em dados, simulando o raciocínio humano.",
+    answer:
+      "Diferente da automação comum, a IA consegue entender contextos, ler mensagens e tomar decisões baseadas em dados, simulando o raciocínio humano.",
+  },
+  {
+    question: "Agentes substituem humanos?",
+    plainAnswer:
+      "Eles substituem o trabalho braçal e repetitivo, permitindo que seus humanos foquem no que realmente importa: estratégia e fechamento.",
+    answer:
+      "Eles substituem o trabalho braçal e repetitivo, permitindo que seus humanos foquem no que realmente importa: estratégia e fechamento.",
+  },
+  {
     question: "Quais tipos de projetos e automações vocês desenvolvem?",
     plainAnswer:
       "Desenvolvemos soluções sob medida em automação de processos e IA, incluindo agentes de IA e chatbots para atendimento, qualificação de leads e agendamento automático via WhatsApp, Instagram ou CRM; automação de processos internos com integração entre sistemas, planilhas, CRMs e ERPs; análise de dados com IA para extração automática de dados de PDFs, e-mails e documentos complexos; e softwares sob medida para fluxos e ferramentas personalizadas.",
