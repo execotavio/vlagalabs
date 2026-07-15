@@ -1,6 +1,6 @@
 # Vlaga Labs
 
-Site institucional estatico da Vlaga Labs, com blog, SEO e publicacao no Cloudflare Pages.
+Site institucional estatico da Vlaga Labs, com blog, SEO e publicacao no Cloudflare Workers.
 
 Producao:
 
@@ -14,7 +14,7 @@ https://github.com/execotavio/vlagalabs
 
 Este projeto roda com Next.js em modo estatico. O site publico nao depende de servidor, banco de dados, API routes, Payload, Prisma ou NextAuth.
 
-O build gera a pasta `out`, que deve ser publicada pelo Cloudflare Pages.
+O build gera a pasta `out`, que e publicada como static assets pelo Cloudflare Workers.
 
 ## Stack
 
@@ -23,7 +23,7 @@ O build gera a pasta `out`, que deve ser publicada pelo Cloudflare Pages.
 - Tailwind CSS
 - Markdown para posts do blog
 - Decap CMS para edicao de posts em `/admin`
-- Cloudflare Pages para build, deploy, CDN e HTTPS
+- Cloudflare Workers para deploy, static assets, CDN e HTTPS
 
 ## Estrutura principal
 
@@ -37,9 +37,9 @@ O build gera a pasta `out`, que deve ser publicada pelo Cloudflare Pages.
 - `lib/blog.ts`: leitura, ordenacao e filtragem dos posts
 - `public/admin/`: Decap CMS
 - `public/uploads/`: imagens enviadas pelo CMS
-- `public/_headers`: headers de seguranca e cache usados pelo Cloudflare Pages
+- `public/_headers`: headers de seguranca e cache usados pelo Cloudflare Workers
 - `public/_redirects`: redirects de `www` e HTTP para `https://vlagalabs.com.br`
-- `wrangler.toml`: configuracao do projeto para Cloudflare Pages
+- `wrangler.toml`: configuracao do Worker e da pasta de static assets
 
 ## Desenvolvimento local
 
@@ -94,27 +94,34 @@ Arquivos esperados no export:
 - `out/_headers`
 - `out/_redirects`
 
-## Publicacao no Cloudflare Pages
+## Publicacao no Cloudflare Workers
 
-O deploy deve acontecer automaticamente a cada push na branch `main`, usando a integracao do Cloudflare Pages com GitHub.
+O deploy deve acontecer automaticamente a cada push na branch `main`, usando a integracao do Cloudflare com GitHub.
 
-Configuracao recomendada no Cloudflare Pages:
+Configuracao recomendada no Cloudflare:
 
-- Framework preset: `None`
+- Tipo de projeto: `Worker`
 - Production branch: `main`
 - Build command: `npm run build`
-- Build output directory: `out`
+- Deploy command: `npx wrangler deploy`
 - Node.js version: `20`
-- Deploy command: deixar vazio
+
+O `wrangler.toml` informa ao Wrangler que a pasta exportada pelo Next deve ser publicada como static assets:
+
+```toml
+[assets]
+directory = "./out"
+```
 
 Fluxo esperado:
 
 1. Commit na `main`
-2. Cloudflare Pages instala dependencias com `npm ci`
-3. Cloudflare Pages roda `npm run build`
-4. Cloudflare Pages publica a pasta `out`
+2. Cloudflare instala dependencias com `npm ci`
+3. Cloudflare roda `npm run build`
+4. Cloudflare roda `npx wrangler deploy`
+5. Wrangler publica a pasta `out` como assets estaticos do Worker
 
-Importante: nao configure `npx wrangler deploy` como deploy command no painel do Cloudflare Pages. Esse comando e para Workers e causa o erro `Missing entry-point to Worker script or to assets directory`. Em projetos Pages conectados ao GitHub, o Cloudflare faz o deploy automaticamente a partir do build output directory.
+Se o build mostrar Node 22 mesmo com `package.json`, adicione a variavel de ambiente `NODE_VERSION` com valor `20` nas configuracoes do projeto no Cloudflare.
 
 O dominio configurado para producao e:
 
@@ -122,14 +129,14 @@ O dominio configurado para producao e:
 vlagalabs.com.br
 ```
 
-No Cloudflare Pages, adicione os dominios customizados no painel do projeto:
+No Cloudflare, adicione os dominios customizados no painel do Worker:
 
 - `vlagalabs.com.br`
 - `www.vlagalabs.com.br`
 
 O arquivo `public/_redirects` redireciona `www` e HTTP para `https://vlagalabs.com.br`.
 
-Se o dominio estiver usando Cloudflare DNS, o proprio Cloudflare Pages pode criar os registros DNS necessarios. Para apex domain, o dominio precisa estar como uma zone no Cloudflare.
+Se o dominio estiver usando Cloudflare DNS, o proprio Cloudflare pode criar os registros DNS necessarios. Para apex domain, o dominio precisa estar como uma zone no Cloudflare.
 
 ## Blog
 
@@ -184,7 +191,7 @@ Backend atual:
 - public folder: `/uploads`
 - OAuth bridge: `https://cms-auth.vlagalabs.com.br`
 
-Ao salvar um post no CMS, o Decap cria um commit na branch `main`. Esse commit dispara um novo deploy no Cloudflare Pages.
+Ao salvar um post no CMS, o Decap cria um commit na branch `main`. Esse commit dispara um novo deploy no Cloudflare.
 
 Somente usuarios com permissao de push no repositorio conseguem publicar.
 

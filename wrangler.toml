@@ -1,3 +1,5 @@
 name = "vlagalabs"
-pages_build_output_dir = "out"
 compatibility_date = "2026-07-15"
+
+[assets]
+directory = "./out"
