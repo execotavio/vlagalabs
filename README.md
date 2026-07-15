@@ -105,6 +105,7 @@ Configuracao recomendada no Cloudflare Pages:
 - Build command: `npm run build`
 - Build output directory: `out`
 - Node.js version: `20`
+- Deploy command: deixar vazio
 
 Fluxo esperado:
 
@@ -112,6 +113,8 @@ Fluxo esperado:
 2. Cloudflare Pages instala dependencias com `npm ci`
 3. Cloudflare Pages roda `npm run build`
 4. Cloudflare Pages publica a pasta `out`
+
+Importante: nao configure `npx wrangler deploy` como deploy command no painel do Cloudflare Pages. Esse comando e para Workers e causa o erro `Missing entry-point to Worker script or to assets directory`. Em projetos Pages conectados ao GitHub, o Cloudflare faz o deploy automaticamente a partir do build output directory.
 
 O dominio configurado para producao e:
 
