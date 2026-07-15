@@ -38,7 +38,7 @@ O build gera a pasta `out`, que e publicada como static assets pelo Cloudflare W
 - `public/admin/`: Decap CMS
 - `public/uploads/`: imagens enviadas pelo CMS
 - `public/_headers`: headers de seguranca e cache usados pelo Cloudflare Workers
-- `public/_redirects`: redirects de `www` e HTTP para `https://vlagalabs.com.br`
+- `worker/index.js`: Worker que redireciona `www`/HTTP para `https://vlagalabs.com.br` e serve os assets
 - `wrangler.toml`: configuracao do Worker e da pasta de static assets
 
 ## Desenvolvimento local
@@ -92,7 +92,6 @@ Arquivos esperados no export:
 - `out/robots.txt`
 - `out/favicon.png`
 - `out/_headers`
-- `out/_redirects`
 
 ## Publicacao no Cloudflare Workers
 
@@ -109,8 +108,12 @@ Configuracao recomendada no Cloudflare:
 O `wrangler.toml` informa ao Wrangler que a pasta exportada pelo Next deve ser publicada como static assets:
 
 ```toml
+main = "./worker/index.js"
+
 [assets]
 directory = "./out"
+binding = "ASSETS"
+run_worker_first = true
 ```
 
 Fluxo esperado:
@@ -134,7 +137,7 @@ No Cloudflare, adicione os dominios customizados no painel do Worker:
 - `vlagalabs.com.br`
 - `www.vlagalabs.com.br`
 
-O arquivo `public/_redirects` redireciona `www` e HTTP para `https://vlagalabs.com.br`.
+O arquivo `worker/index.js` redireciona `www` e HTTP para `https://vlagalabs.com.br`.
 
 Se o dominio estiver usando Cloudflare DNS, o proprio Cloudflare pode criar os registros DNS necessarios. Para apex domain, o dominio precisa estar como uma zone no Cloudflare.
 
