@@ -1,6 +1,6 @@
 # Vlaga Labs
 
-Site institucional estatico da Vlaga Labs, com blog, SEO e publicacao no GitHub Pages.
+Site institucional estatico da Vlaga Labs, com blog, SEO e publicacao no Cloudflare Pages.
 
 Producao:
 
@@ -14,7 +14,7 @@ https://github.com/execotavio/vlagalabs
 
 Este projeto roda com Next.js em modo estatico. O site publico nao depende de servidor, banco de dados, API routes, Payload, Prisma ou NextAuth.
 
-O build gera a pasta `out`, que e publicada no GitHub Pages pelo workflow `.github/workflows/pages.yml`.
+O build gera a pasta `out`, que deve ser publicada pelo Cloudflare Pages.
 
 ## Stack
 
@@ -23,8 +23,7 @@ O build gera a pasta `out`, que e publicada no GitHub Pages pelo workflow `.gith
 - Tailwind CSS
 - Markdown para posts do blog
 - Decap CMS para edicao de posts em `/admin`
-- GitHub Actions para build e deploy
-- GitHub Pages como hospedagem
+- Cloudflare Pages para build, deploy, CDN e HTTPS
 
 ## Estrutura principal
 
@@ -38,9 +37,9 @@ O build gera a pasta `out`, que e publicada no GitHub Pages pelo workflow `.gith
 - `lib/blog.ts`: leitura, ordenacao e filtragem dos posts
 - `public/admin/`: Decap CMS
 - `public/uploads/`: imagens enviadas pelo CMS
-- `public/CNAME`: dominio customizado usado no export
-- `public/.nojekyll`: evita processamento do GitHub Pages com Jekyll
-- `.github/workflows/pages.yml`: deploy do GitHub Pages
+- `public/_headers`: headers de seguranca e cache usados pelo Cloudflare Pages
+- `public/_redirects`: redirects de `www` e HTTP para `https://vlagalabs.com.br`
+- `wrangler.toml`: configuracao do projeto para Cloudflare Pages
 
 ## Desenvolvimento local
 
@@ -91,20 +90,28 @@ Arquivos esperados no export:
 - `out/admin/index.html`
 - `out/sitemap.xml`
 - `out/robots.txt`
-- `out/CNAME`
-- `out/.nojekyll`
 - `out/favicon.png`
+- `out/_headers`
+- `out/_redirects`
 
-## Publicacao no GitHub Pages
+## Publicacao no Cloudflare Pages
 
-O deploy acontece automaticamente a cada push na branch `main`.
+O deploy deve acontecer automaticamente a cada push na branch `main`, usando a integracao do Cloudflare Pages com GitHub.
 
-Fluxo:
+Configuracao recomendada no Cloudflare Pages:
+
+- Framework preset: `None`
+- Production branch: `main`
+- Build command: `npm run build`
+- Build output directory: `out`
+- Node.js version: `20`
+
+Fluxo esperado:
 
 1. Commit na `main`
-2. GitHub Actions instala dependencias com `npm ci`
-3. Roda `npm run build`
-4. Publica a pasta `out` no GitHub Pages
+2. Cloudflare Pages instala dependencias com `npm ci`
+3. Cloudflare Pages roda `npm run build`
+4. Cloudflare Pages publica a pasta `out`
 
 O dominio configurado para producao e:
 
@@ -112,7 +119,14 @@ O dominio configurado para producao e:
 vlagalabs.com.br
 ```
 
-O arquivo correto para o dominio no build e `public/CNAME`, pois ele e copiado para `out/CNAME`.
+No Cloudflare Pages, adicione os dominios customizados no painel do projeto:
+
+- `vlagalabs.com.br`
+- `www.vlagalabs.com.br`
+
+O arquivo `public/_redirects` redireciona `www` e HTTP para `https://vlagalabs.com.br`.
+
+Se o dominio estiver usando Cloudflare DNS, o proprio Cloudflare Pages pode criar os registros DNS necessarios. Para apex domain, o dominio precisa estar como uma zone no Cloudflare.
 
 ## Blog
 
@@ -167,7 +181,7 @@ Backend atual:
 - public folder: `/uploads`
 - OAuth bridge: `https://cms-auth.vlagalabs.com.br`
 
-Ao salvar um post no CMS, o Decap cria um commit na branch `main`. Esse commit dispara o GitHub Actions e publica a nova versao no GitHub Pages.
+Ao salvar um post no CMS, o Decap cria um commit na branch `main`. Esse commit dispara um novo deploy no Cloudflare Pages.
 
 Somente usuarios com permissao de push no repositorio conseguem publicar.
 
