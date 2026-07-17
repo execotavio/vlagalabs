@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { BarChart3, Bot, TrendingUp, Workflow } from "lucide-react";
+import { Bot, Search, TrendingUp, Workflow } from "lucide-react";
 
 const solutions = [
   {
@@ -17,9 +17,9 @@ const solutions = [
     description: "Integrações entre sistemas, planilhas, CRMs e ERPs para eliminar tarefas manuais e retrabalho.",
   },
   {
-    icon: BarChart3,
-    title: "Análise de Dados com IA",
-    description: "Extração, leitura e organização automática de dados de PDFs, e-mails e documentos complexos.",
+    icon: Search,
+    title: "Prospecção Automática",
+    description: "Busca de leads qualificados e disparo automático de mensagens para acelerar a geração de oportunidades.",
   },
   {
     icon: Workflow,
