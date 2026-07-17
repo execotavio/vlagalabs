@@ -136,7 +136,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-20 bg-gray-50" ref={ref}>
+    <section id="faq" className="py-20 bg-vlaga-primary" ref={ref}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -149,10 +149,10 @@ export default function FAQ() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center justify-center p-3 bg-vlaga-primary/10 rounded-full mb-4">
-            <HelpCircle className="w-6 h-6 text-vlaga-primary" />
+          <div className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/10 p-3 mb-4">
+            <HelpCircle className="w-6 h-6 text-vlaga-accent" />
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-vlaga-primary mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Perguntas Frequentes
           </h2>
         </motion.div>
@@ -165,17 +165,17 @@ export default function FAQ() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-xl shadow-md overflow-hidden"
+              className="overflow-hidden rounded-xl border border-white/10 bg-white/[0.06] shadow-md shadow-black/10"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/[0.06] transition-colors"
               >
-                <span className="text-lg font-semibold text-vlaga-primary pr-4">
+                <span className="text-lg font-semibold text-white pr-4">
                   {faq.question}
                 </span>
                 <ChevronDown
-                  className={`w-5 h-5 text-vlaga-primary transition-transform flex-shrink-0 ${
+                  className={`w-5 h-5 text-vlaga-accent transition-transform flex-shrink-0 ${
                     openIndex === index ? "rotate-180" : ""
                   }`}
                 />
@@ -190,7 +190,7 @@ export default function FAQ() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+                    <div className="px-6 pb-5 text-white/70 leading-relaxed">
                       {faq.answer}
                     </div>
                   </motion.div>

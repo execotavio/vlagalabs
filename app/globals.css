@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --vlaga-primary: #002c22;
+    --vlaga-primary: #00201a;
     --vlaga-accent: #ff6b1a;
     --vlaga-light: #eaeaea;
     --background: 0 0% 100%;
@@ -35,7 +35,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-vlaga-primary text-foreground;
   }
 }
 

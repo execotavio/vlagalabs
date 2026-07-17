@@ -34,7 +34,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
                 <Phone className="w-5 h-5 flex-shrink-0" />
-                <span>+55 (11) 9999-9999</span>
+                <span>+55 (11) 5104-2299</span>
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
                 <Mail className="w-5 h-5 flex-shrink-0" />
@@ -59,7 +59,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/#solucoes" className="text-gray-300 hover:text-vlaga-accent transition-colors">
-                  Análise de dados
+                  Prospecção automática
                 </Link>
               </li>
               <li>
@@ -75,13 +75,18 @@ export default function Footer() {
             <h4 className="text-lg font-bold mb-4">Empresa</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/#sobre" className="text-gray-300 hover:text-vlaga-accent transition-colors">
-                  Sobre
+                <Link href="/#depoimentos" className="text-gray-300 hover:text-vlaga-accent transition-colors">
+                  Depoimentos
                 </Link>
               </li>
               <li>
                 <Link href="/blog" className="text-gray-300 hover:text-vlaga-accent transition-colors">
                   Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/#faq" className="text-gray-300 hover:text-vlaga-accent transition-colors">
+                  FAQ
                 </Link>
               </li>
               <li>

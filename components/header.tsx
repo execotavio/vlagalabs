@@ -19,16 +19,18 @@ export default function Header() {
   }, []);
 
   const navLinks = [
-    { href: "/#home", label: "Home" },
-    { href: "/#sobre", label: "Sobre" },
     { href: "/#solucoes", label: "Soluções" },
-    { href: "/blog", label: "Artigos" },
+    { href: "/#depoimentos", label: "Depoimentos" },
+    { href: "/#faq", label: "FAQ" },
+    { href: "/blog", label: "Blog" },
   ];
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-sm shadow-md" : "bg-transparent"
+        isScrolled
+          ? "bg-vlaga-primary/95 backdrop-blur-sm shadow-lg shadow-black/10 border-b border-white/10"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,7 +53,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-700 hover:text-vlaga-primary transition-colors font-medium"
+                className="text-white/80 hover:text-vlaga-accent transition-colors font-medium"
               >
                 {link.label}
               </Link>
@@ -62,7 +64,7 @@ export default function Header() {
           <div className="hidden md:block">
             <Link
               href="/#contato"
-              className="px-6 py-3 bg-vlaga-accent text-white rounded-lg hover:bg-vlaga-primary transition-all shadow-md hover:shadow-lg font-medium"
+              className="px-6 py-3 bg-vlaga-accent text-white rounded-lg hover:bg-white hover:text-vlaga-primary transition-all shadow-md hover:shadow-lg font-medium"
             >
               Agendar Reunião
             </Link>
@@ -70,7 +72,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-700"
+            className="md:hidden text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Menu"
           >
@@ -86,14 +88,14 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-gray-200"
+            className="md:hidden bg-vlaga-primary border-t border-white/10"
           >
             <div className="px-4 py-4 space-y-3">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="block py-2 text-gray-700 hover:text-vlaga-primary transition-colors font-medium"
+                  className="block py-2 text-white/80 hover:text-vlaga-accent transition-colors font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -101,7 +103,7 @@ export default function Header() {
               ))}
               <Link
                 href="/#contato"
-                className="block w-full px-6 py-3 bg-vlaga-accent text-white rounded-lg text-center hover:bg-vlaga-primary transition-all shadow-md font-medium"
+                className="block w-full px-6 py-3 bg-vlaga-accent text-white rounded-lg text-center hover:bg-white hover:text-vlaga-primary transition-all shadow-md font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Agendar Reunião

@@ -20,6 +20,9 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        'vlaga-primary': '#00201a',
+        'vlaga-accent': '#ff6b1a',
+        'vlaga-light': '#eaeaea',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

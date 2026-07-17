@@ -30,7 +30,7 @@ export default function Testimonials() {
   });
 
   return (
-    <section className="py-20 bg-white" ref={ref}>
+    <section id="depoimentos" className="py-20 bg-vlaga-primary" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -39,10 +39,10 @@ export default function Testimonials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-vlaga-primary mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             O Que Dizem Sobre Nós
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-white/70 max-w-2xl mx-auto">
             Tecnologia aplicada com foco no que importa: operação fluida, atendimento melhor e decisões mais rápidas.
           </p>
         </motion.div>
@@ -55,12 +55,12 @@ export default function Testimonials() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 relative"
+              className="relative rounded-xl border border-white/10 bg-white/[0.06] p-8 shadow-md shadow-black/10 transition-all duration-300 hover:-translate-y-1 hover:border-vlaga-accent/40 hover:bg-white/[0.09] hover:shadow-xl hover:shadow-black/20"
             >
-              <Quote className="absolute top-6 right-6 w-8 h-8 text-vlaga-accent opacity-20" />
+              <Quote className="absolute top-6 right-6 w-8 h-8 text-vlaga-accent opacity-40" />
               
               <div className="flex flex-col items-center text-center">
-                <div className="relative w-20 h-20 mb-4 rounded-full overflow-hidden bg-vlaga-primary">
+                <div className="relative w-20 h-20 mb-4 overflow-hidden rounded-full border border-white/10 bg-vlaga-primary">
                   <Image
                     src="/brand-profile.png"
                     alt="Vlaga Labs"
@@ -69,14 +69,14 @@ export default function Testimonials() {
                   />
                 </div>
                 
-                <h3 className="text-lg font-bold text-vlaga-primary mb-1">
+                <h3 className="text-lg font-bold text-white mb-1">
                   {testimonial.name}
                 </h3>
-                <p className="text-sm text-gray-500 mb-4">
+                <p className="text-sm text-vlaga-accent mb-4">
                   {testimonial.role}
                 </p>
                 
-                <p className="text-gray-600 leading-relaxed italic">
+                <p className="text-white/70 leading-relaxed italic">
                   &quot;{testimonial.content}&quot;
                 </p>
               </div>

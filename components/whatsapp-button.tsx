@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function WhatsAppButton() {
   const handleClick = () => {
-    const phoneNumber = "5511999999999";
+    const phoneNumber = "551151042299";
     const message = "Olá! Gostaria de mais informações sobre a Vlaga Labs.";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
