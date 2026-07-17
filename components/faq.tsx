@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
@@ -136,61 +136,59 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-20 bg-vlaga-primary" ref={ref}>
+    <section id="faq" className="bg-vlaga-primary py-14 md:py-16" ref={ref}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-7 text-center md:mb-8"
         >
-          <div className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/10 p-3 mb-4">
-            <HelpCircle className="w-6 h-6 text-vlaga-accent" />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-vlaga-accent">
+            Dúvidas
+          </p>
+          <h2 className="text-3xl font-bold text-white md:text-4xl">
             Perguntas Frequentes
           </h2>
         </motion.div>
 
-        {/* FAQ Items */}
-        <div className="space-y-4">
+        <div className="mx-auto max-w-4xl">
           {faqs.map((faq, index) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
+              key={faq.question}
+              initial={{ opacity: 0, y: 12 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="overflow-hidden rounded-xl border border-white/10 bg-white/[0.06] shadow-md shadow-black/10"
+              transition={{ duration: 0.35, delay: index * 0.03 }}
+              className="border-b border-white/12"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/[0.06] transition-colors"
+                className="flex w-full items-center justify-between gap-4 py-2.5 text-left md:py-3"
               >
-                <span className="text-lg font-semibold text-white pr-4">
+                <span className="text-sm font-semibold leading-snug text-vlaga-accent md:text-[15px]">
                   {faq.question}
                 </span>
                 <ChevronDown
-                  className={`w-5 h-5 text-vlaga-accent transition-transform flex-shrink-0 ${
+                  className={`h-4 w-4 flex-shrink-0 text-vlaga-accent transition-transform ${
                     openIndex === index ? "rotate-180" : ""
                   }`}
                 />
               </button>
-              
+
               <AnimatePresence>
                 {openIndex === index && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.25 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-5 text-white/70 leading-relaxed">
+                    <div className="pb-3 pr-8 text-sm leading-relaxed text-white">
                       {faq.answer}
                     </div>
                   </motion.div>
